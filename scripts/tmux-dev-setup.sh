@@ -4,14 +4,13 @@ set -euo pipefail
 
 check_dependencies() {
   local missing=0 tool
-  for tool in tmux; do
-    if command -v "$tool" >/dev/null 2>&1; then
-      printf '  found %s: %s\n' "$tool" "$(command -v "$tool")"
-    else
-      printf '  missing required tool: %s\n' "$tool" >&2
-      missing=1
-    fi
-  done
+  tool=tmux
+  if command -v "$tool" >/dev/null 2>&1; then
+    printf '  found %s: %s\n' "$tool" "$(command -v "$tool")"
+  else
+    printf '  missing required tool: %s\n' "$tool" >&2
+    missing=1
+  fi
   for tool in fzf fd rg bat; do
     if command -v "$tool" >/dev/null 2>&1; then
       printf '  found optional tool: %s\n' "$tool"
